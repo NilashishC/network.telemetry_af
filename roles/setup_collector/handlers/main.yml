@@ -1,0 +1,16 @@
+---
+# handlers file for setup_collector
+- name: restart_telegraf
+  ansible.builtin.service:
+    name: telegraf
+    state: restarted
+
+- name: restart_grafana
+  ansible.builtin.service:
+    name: grafana-server
+    state: restarted
+
+- name: restart_influxdb
+  ansible.builtin.service:
+    name: influxdb
+    state: restarted

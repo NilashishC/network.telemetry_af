@@ -1,0 +1,18 @@
+---
+# tasks file for setup_collector
+- debug:
+    msg: "Start setting up collector packages"
+
+- name: Override variables (if specified)
+  ansible.builtin.include_vars:
+    file: "{{ collector_setup_data }}"
+  when: collector_setup_data is defined
+
+- name: "Setup InfluxDB"
+  ansible.builtin.include_tasks: influxdb.yaml
+
+- name: "Setup Telegraf"
+  ansible.builtin.include_tasks: telegraf.yaml
+
+- name: "Setup Grafana"
+  ansible.builtin.include_tasks: grafana.yaml

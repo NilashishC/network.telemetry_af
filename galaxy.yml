@@ -1,0 +1,13 @@
+---
+namespace: network
+name: telemetry
+version: 1.0.0
+dependencies:
+  "cisco.nxos": ">=3.0.0"
+readme: README.md
+authors:
+- Nilashish Chakraborty (@NilashishC)
+description: An Ansible Collection to setup Telemetry Collector for Network Appliances.
+license:
+- GPL-2.0-or-later
+tags: ['network', 'telemetry', 'cisco']

@@ -1,0 +1,38 @@
+---
+- name: Fetch grafana
+  ansible.builtin.get_url:
+    url: "{{ package_path.grafana }}"
+    dest: "{{ package_path.destination }}"
+
+- name: Install grafana
+  ansible.builtin.apt:
+    deb: "{{ package_path.destination }}/{{ package_path.grafana.split('/')[-1] }}"
+
+- name: Copy grafana configuration file
+  ansible.builtin.template:
+    src: files/grafana/grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+  notify: restart_grafana
+
+- name: Copy grafana datasources
+  ansible.builtin.template:
+    src: files/grafana/datasources/datasources.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/datasources.yaml
+  notify: restart_grafana
+
+- name: Copy grafana dashboard for VXLAN dialout
+  ansible.builtin.template:
+    src: files/grafana/dashboards/dashboard_vxlan_dialout.json
+    dest: /etc/grafana/provisioning/dashboards/dashboard_vxlan_dialout.json
+  notify: restart_grafana
+
+- name: Copy grafana dashboard YAML file
+  ansible.builtin.template:
+    src: files/grafana/dashboards/dashboards.yaml
+    dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
+  notify: restart_grafana
+
+- name: Start grafana service
+  ansible.builtin.service:
+    name: grafana-server
+    state: started
