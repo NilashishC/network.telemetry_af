@@ -32,44 +32,10 @@ ansible-galaxy collection install git+https://github.com/NilashishC/network.tele
 To override those, you can provide an YAML file with all the required variables and run your playbook
 by passing `-e collector_setup_data=<path to setup data file>`.
 
-### Example collector setup data file
-```yaml
----
-# vars file for setup_collector
-package_path:
-  destination: /home/ubuntu
-  influxdb: https://dl.influxdata.com/influxdb/releases/influxdb2-2.4.0-amd64.deb
-  influx_client: https://dl.influxdata.com/influxdb/releases/influxdb2-client-2.4.0-linux-amd64.tar.gz
-  grafana: https://dl.grafana.com/enterprise/release/grafana-enterprise_9.1.6_amd64.deb
+### Sample collector setup data file
 
-telegraf:
-  config: files/telegraf/telegraf.conf.j2
+An example collector setup data file is available [here](https://github.com/NilashishC/network.telemetry/blob/main/roles/setup_collector/vars/main.yml).
 
-influxdb:
-  org: Ansible
-  username: ansible
-  password: ansible123
-  token: MySecretToken
-  bucket_name: nxos_dialout
-
-influx_client:
-  name: influxdb2-client-2.4.0-linux-amd64
-  setup: "influx setup --org {{ influxdb.org }} --bucket {{ influxdb.bucket_name }} --username {{ influxdb.username }} --password {{ influxdb.password }} --token {{ influxdb.token }} --retention 2h --force"
-
-grafana:
-  org_name: Ansible
-  org_role: Admin
-  config: files/grafana/grafana.ini.j2
-  datasources: files/grafana/datasources/datasources.yaml.j2
-  dashboards:
-    definitions: 
-      - files/grafana/dashboards/dashboard_vxlan_dialout.json
-    config: files/grafana/dashboards/dashboards.yaml
-
-telemetry:
-  transport: "grpc"
-  service_address: ":57000"
-```
 
 ### See Also:
 
