@@ -6,7 +6,7 @@
 
 - name: Copy Telegraf configuration file
   ansible.builtin.template:
-    src: files/telegraf/telegraf.conf.j2
+    src: "{{ telegraf.config }}"
     dest: /etc/telegraf/telegraf.conf
   notify:
     - restart_telegraf

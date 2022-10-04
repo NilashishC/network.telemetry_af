@@ -10,25 +10,26 @@
 
 - name: Copy grafana configuration file
   ansible.builtin.template:
-    src: files/grafana/grafana.ini.j2
+    src: "{{ grafana.config }}"
     dest: /etc/grafana/grafana.ini
   notify: restart_grafana
 
 - name: Copy grafana datasources
   ansible.builtin.template:
-    src: files/grafana/datasources/datasources.yaml.j2
+    src: "{{ grafana.datasources }}"
     dest: /etc/grafana/provisioning/datasources/datasources.yaml
   notify: restart_grafana
 
 - name: Copy grafana dashboard for VXLAN dialout
   ansible.builtin.template:
-    src: files/grafana/dashboards/dashboard_vxlan_dialout.json
-    dest: /etc/grafana/provisioning/dashboards/dashboard_vxlan_dialout.json
+    src: "{{ item }}"
+    dest: "/etc/grafana/provisioning/dashboards/{{ item.split('/')[-1] }}"
+  loop: "{{ grafana.dashboards.definitions }}"
   notify: restart_grafana
 
 - name: Copy grafana dashboard YAML file
   ansible.builtin.template:
-    src: files/grafana/dashboards/dashboards.yaml
+    src: "{{ grafana.dashboards.config }}"
     dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
   notify: restart_grafana
 

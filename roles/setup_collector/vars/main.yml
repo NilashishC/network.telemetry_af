@@ -6,6 +6,9 @@ package_path:
   influx_client: https://dl.influxdata.com/influxdb/releases/influxdb2-client-2.4.0-linux-amd64.tar.gz
   grafana: https://dl.grafana.com/enterprise/release/grafana-enterprise_9.1.6_amd64.deb
 
+telegraf:
+  config: files/telegraf/telegraf.conf.j2
+
 influxdb:
   org: Ansible
   username: ansible
@@ -20,6 +23,12 @@ influx_client:
 grafana:
   org_name: Ansible
   org_role: Admin
+  config: files/grafana/grafana.ini.j2
+  datasources: files/grafana/datasources/datasources.yaml.j2
+  dashboards:
+    definitions: 
+      - files/grafana/dashboards/dashboard_vxlan_dialout.json
+    config: files/grafana/dashboards/dashboards.yaml
 
 telemetry:
   transport: "grpc"

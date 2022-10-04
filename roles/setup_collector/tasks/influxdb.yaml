@@ -7,6 +7,7 @@
 - name: Install Influxdb
   ansible.builtin.apt:
     deb: "{{ package_path.destination }}/{{ package_path.influxdb.split('/')[-1] }}"
+  register: result
 
 - name: Start Influxdb2 service
   ansible.builtin.service:
@@ -17,17 +18,21 @@
   ansible.builtin.get_url:
     url: "{{ package_path.influx_client }}"
     dest: "{{ package_path.destination }}"
+  when: result.changed == True
   
 - name: Unpackage Influx client
   ansible.builtin.unarchive:
     remote_src: yes
     src: "{{ package_path.influx_client.split('/')[-1] }}"
     dest: "{{ package_path.destination }}"
-  register: result
+  when: result.changed == True
 
 - name: Move Influx client executable
   ansible.builtin.command: "cp {{ influx_client.name }}/influx /usr/bin/"
+  when: result.changed == True
+  changed_when: False
 
 - name: Setup influxdb with default bucket
   ansible.builtin.command: "{{ influx_client.setup }}"
+  when: result.changed == True
   ignore_errors: true
