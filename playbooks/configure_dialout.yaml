@@ -1,5 +1,6 @@
 ---
 - name: Configure Dial-Out Telemetry
+  hosts: Leaf01
   gather_facts: no
   tasks:
     - name: "Setup dial-out telemetry"
