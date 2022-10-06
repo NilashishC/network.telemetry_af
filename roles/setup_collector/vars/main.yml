@@ -4,6 +4,7 @@ package_path:
   destination: /home/ubuntu
   influxdb: https://dl.influxdata.com/influxdb/releases/influxdb2-2.4.0-amd64.deb
   influx_client: https://dl.influxdata.com/influxdb/releases/influxdb2-client-2.4.0-linux-amd64.tar.gz
+  telegraf: https://dl.influxdata.com/telegraf/releases/telegraf_1.21.4-1_amd64.deb
   grafana: https://dl.grafana.com/enterprise/release/grafana-enterprise_9.1.6_amd64.deb
 
 telegraf:

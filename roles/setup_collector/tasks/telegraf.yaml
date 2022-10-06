@@ -1,8 +1,13 @@
 ---
+- name: Fetch Telegraf package
+  ansible.builtin.get_url:
+    url: "{{ package_path.telegraf }}"
+    dest: "{{ package_path.destination }}"
+
 - name: Install Telegraf
-  ansible.builtin.package:
-    name: telegraf
-    state: present
+  ansible.builtin.apt:
+    deb: "{{ package_path.destination }}/{{ package_path.telegraf.split('/')[-1] }}"
+  register: result
 
 - name: Copy Telegraf configuration file
   ansible.builtin.template:
