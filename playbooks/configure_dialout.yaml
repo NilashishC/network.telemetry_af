@@ -1,0 +1,8 @@
+---
+- name: Configure Dial-Out Telemetry
+  gather_facts: no
+  tasks:
+    - name: "Setup dial-out telemetry"
+      cisco.nxos.nxos_telemetry:
+        config: "{{ telemetry }}"
+        state: merged

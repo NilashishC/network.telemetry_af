@@ -1,0 +1,12 @@
+---
+- name: Validate Dial-Out Telemetry
+  gather_facts: no
+  tasks:
+    - name: Fetch telemetry transport information
+      cisco.nxos.nxos_command:
+        commands: show telemetry transport
+      register: result
+
+    - name: Assert that all collectors are connected
+      ansible.builtin.assert:
+        that: "'Transmit Error' not in result.stdout[0]"
