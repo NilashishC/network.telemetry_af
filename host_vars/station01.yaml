@@ -1,5 +1,5 @@
 ---
-# vars file for setup_collector
+# vars file for collector
 package_path:
   destination: /home/ubuntu
   influxdb: https://dl.influxdata.com/influxdb/releases/influxdb2-2.4.0-amd64.deb
