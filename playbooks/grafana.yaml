@@ -1,5 +1,5 @@
 ---
-- name: Setup InfluxDB
+- name: Setup Grafana
   hosts: collector
   gather_facts: yes
   tasks:
