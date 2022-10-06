@@ -4,4 +4,4 @@
 - name: Running configure
   cisco.nxos.nxos_telemetry:
     config: "{{ telemetry }}"
-    state: replaced
+    state: merged
