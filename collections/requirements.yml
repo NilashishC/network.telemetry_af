@@ -1,6 +1,0 @@
-
----
-collections:
-  - name: https://github.com/NilashishC/cisco.nxos
-    type: git
-    version: fix_telemetry
