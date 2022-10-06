@@ -1,6 +1,6 @@
 ---
 - name: Setup InfluxDB
-  hosts: collector
+  hosts: station01
   gather_facts: yes
   tasks:
     - name: Fetch Influxdb package
