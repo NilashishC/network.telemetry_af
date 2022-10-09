@@ -9,17 +9,21 @@ package_path:
 
 telegraf:
   config: files/telegraf/telegraf.conf.j2
+  dialin_config: files/telegraf/gnmi.conf.j2
+  certificates: /home/ubuntu/certs/
 
 influxdb:
   org: Ansible
   username: ansible
   password: ansible123
   token: MySecretToken
-  bucket_name: nxos_dialout
+  dialout_bucket: nxos_dialout
+  dialin_bucket: nxos_gnmi
 
 influx_client:
   name: influxdb2-client-2.4.0-linux-amd64
-  setup: "influx setup --org {{ influxdb.org }} --bucket {{ influxdb.bucket_name }} --username {{ influxdb.username }} --password {{ influxdb.password }} --token {{ influxdb.token }} --retention 2h --force"
+  setup: "influx setup --org {{ influxdb.org }} --bucket {{ influxdb.dialout_bucket }} --username {{ influxdb.username }} --password {{ influxdb.password }} --token {{ influxdb.token }} --retention 2h --force"
+  dialin_bucket: "influx bucket create -n {{ influxdb.dialin_bucket }} -r 2h"
 
 grafana:
   org_name: Ansible
@@ -29,8 +33,16 @@ grafana:
   dashboards:
     definitions: 
       - files/grafana/dashboards/dashboard_vxlan_dialout.json
+      - files/grafana/dashboards/dashboard_vxlan_dialin.json
     config: files/grafana/dashboards/dashboards.yaml
 
 telemetry:
   transport: "grpc"
   service_address: ":57000"
+
+dialin:
+  target:
+    ip: 192.168.1.100
+    port: 50051
+    username: admin
+    password: admin

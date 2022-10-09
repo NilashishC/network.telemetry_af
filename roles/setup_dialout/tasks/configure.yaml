@@ -1,7 +1,0 @@
----
-# tasks file for configuring telemetry
-
-- name: Running configure
-  cisco.nxos.nxos_telemetry:
-    config: "{{ telemetry }}"
-    state: merged

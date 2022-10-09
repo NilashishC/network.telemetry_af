@@ -1,0 +1,13 @@
+---
+# tasks file for configuring dialin
+- name: Copy gNMI dial in certificate to the device
+  cisco.nxos.nxos_file_copy:
+    local_file: "{{ dialin.certificate }}"
+    remote_file: gnmi.pfx
+
+- name: Install new certificate and configure gRPC
+  cisco.nxos.nxos_config:
+    lines:
+      - "crypto ca trustpoint gnmi"
+      - "crypto ca import gnmi pkcs12 gnmi.pfx {{ dialin.passphrase }}"
+      - "grpc certificate gnmi"

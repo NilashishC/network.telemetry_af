@@ -13,20 +13,20 @@ transport = "{{ telemetry.transport }}"
 service_address = "{{ telemetry.service_address }}"
 
 # uncomment below to enable tls for dial-out plguin
-# tls_cert = "/etc/telegraf/cert/telegraf.crt"
-# tls_key = "/etc/telegraf/cert/telegraf.key"
+tls_cert = "/etc/telegraf/cert/telegraf.crt"
+tls_key = "/etc/telegraf/cert/telegraf.key"
 
 [inputs.cisco_telemetry_mdt.tags]
-tag1 = "{{ influxdb.bucket_name }}"
+tag1 = "{{ influxdb.dialout_bucket }}"
 
 [[outputs.influxdb_v2]]
 urls = ["http://localhost:8086"]
 token = "{{ influxdb.token }}"
 organization = "{{ influxdb.org }}"
-bucket = "{{ influxdb.bucket_name }}"
+bucket = "{{ influxdb.dialout_bucket }}"
 
 [outputs.influxdb_v2.tagpass]
-tag1 = ["{{ influxdb.bucket_name }}",]
+tag1 = ["{{ influxdb.dialout_bucket }}",]
 
 [[outputs.file]]
 ## Files to write to, "stdout" is a specially handled file.

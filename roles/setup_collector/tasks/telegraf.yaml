@@ -1,15 +1,23 @@
 ---
-- name: Fetch Telegraf package
+- name: "Fetch Telegraf package"
   ansible.builtin.get_url:
     url: "{{ package_path.telegraf }}"
     dest: "{{ package_path.destination }}"
 
-- name: Install Telegraf
+- name: "Install Telegraf"
   ansible.builtin.apt:
     deb: "{{ package_path.destination }}/{{ package_path.telegraf.split('/')[-1] }}"
   register: result
 
-- name: Copy Telegraf configuration file
+- name: "Copy Telegraf authentication certificates"
+  ansible.builtin.copy:
+    src: "{{ telegraf.certificates }}"
+    dest: /etc/telegraf/cert/
+  notify:
+    - restart_telegraf
+    - restart_influxdb
+
+- name: "Copy Telegraf configuration file"
   ansible.builtin.template:
     src: "{{ telegraf.config }}"
     dest: /etc/telegraf/telegraf.conf
@@ -17,7 +25,15 @@
     - restart_telegraf
     - restart_influxdb
 
-- name: Start telegraf service
+- name: "Copy Telegraf dial-in configuration file"
+  ansible.builtin.template:
+    src: "{{ telegraf.dialin_config }}"
+    dest: /etc/telegraf/telegraf.d/gnmi.conf
+  notify:
+    - restart_telegraf
+    - restart_influxdb
+
+- name: "Start telegraf service"
   ansible.builtin.service:
     name: telegraf
     state: started

@@ -1,0 +1,16 @@
+---
+# tasks file for setup_nxos
+
+- name: Turn on feature SCP and gRPC
+  cisco.nxos.nxos_feature:
+    feature: "{{ item }}"
+    state: enabled
+  loop:
+    - scp-server
+    - grpc
+
+- name: Configure Dial-Out Telemetry
+  ansible.builtin.include_tasks: configure_dialout.yaml
+
+- name: Configure Dial-In Telemetry
+  ansible.builtin.include_tasks: configure_dialin.yaml
