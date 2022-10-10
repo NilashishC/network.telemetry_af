@@ -4,7 +4,7 @@ addresses = ["{{ dialin.target.ip }}:{{ dialin.target.port }}"]
 
 ### define credentials
 username = "{{ dialin.target.username }}"
-password = "{{ dialin.target.password }}!"
+password = "{{ dialin.target.password }}"
 
 ### enable client-side TLS and define CA to authenticate the device
 enable_tls = true
@@ -285,7 +285,7 @@ subscription_mode = "sample"
 sample_interval = "30s"
 
 [[outputs.influxdb_v2]]
-urls = ["http://influxdb:8086"]
+urls = ["http://localhost:8086"]
 token = "{{ influxdb.token }}"
 organization = "{{ influxdb.org }}"
 bucket = "{{ influxdb.dialin_bucket }}"
