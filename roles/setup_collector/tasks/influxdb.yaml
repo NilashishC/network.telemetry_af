@@ -19,7 +19,7 @@
     url: "{{ package_path.influx_client }}"
     dest: "{{ package_path.destination }}"
   when: result.changed == True
-  
+
 - name: "Unpackage Influx client"
   ansible.builtin.unarchive:
     remote_src: yes

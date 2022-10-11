@@ -14,4 +14,4 @@ providers:
     updateIntervalSeconds: 10
     allowUiUpdates: true
     options:
-      path: /etc/grafana/provisioning/dashboards/dashboard_vxlan_dialout.json 
+      path: /etc/grafana/provisioning/dashboards/dashboard_vxlan_dialout.json
