@@ -5,6 +5,7 @@ dialin:
   passphrase: cisco123
 
 dialout:
+  collector_ip: 13.233.233.202
   certificate: /home/nchakrab/ansible-collections/certs/telegraf.crt
   telemetry:
     vrf: management
