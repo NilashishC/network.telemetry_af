@@ -24,13 +24,11 @@ ansible-galaxy collection install git+https://github.com/NilashishC/network.tele
   gather_facts: yes
   tasks:
     - ansible.builtin.include_role:
-        name: network.telemetry.setup_telemetry
+        name: network.telemetry.setup_nxos
 
 ```
 
-**Note:** This collection comes with setup data pre-loaded in vars/main.yaml for collector setup role. 
-To override those, you can provide an YAML file with all the required variables and run your playbook
-by passing `-e collector_setup_data=<path to setup data file>`.
+**Note:** This collection comes with setup data pre-loaded in vars/main.yaml for setup_collection & setup_nxos roles. To override those, you can provide an YAML file with all the required variables and run your playbook by passing `-e collector_setup_data=<path to setup data file>` & `-e nxos_setup_data=<path to setup data file>`.
 
 ### Sample collector setup data file
 
