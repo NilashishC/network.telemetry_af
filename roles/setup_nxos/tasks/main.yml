@@ -18,6 +18,8 @@
 
 - name: Configure Dial-Out Telemetry
   ansible.builtin.include_tasks: configure_dialout.yaml
+  when: nxos_dialout | d(True)
 
 - name: Configure Dial-In Telemetry
   ansible.builtin.include_tasks: configure_dialin.yaml
+  when: nxos_dialin | d(True)
