@@ -1,5 +1,12 @@
 ---
 # tasks file for setup_nxos
+- debug:
+    msg: "Start setting up NX-OS telemetry configuration"
+
+- name: Override variables (if specified)
+  ansible.builtin.include_vars:
+    file: "{{ nxos_setup_data }}"
+  when: nxos_setup_data is defined
 
 - name: Turn on feature SCP and gRPC
   cisco.nxos.nxos_feature:

@@ -14,7 +14,7 @@ dialout:
     destination_groups:
       - destination:
           encoding: gpb
-          ip: 13.233.233.202
+          ip: "{{ collector_ip }}"
           port: '57000'
           protocol: grpc
         id: '1'

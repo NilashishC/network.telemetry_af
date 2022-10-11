@@ -5,3 +5,11 @@
     local_file: "{{ dialout.certificate }}"
     remote_file: telegraf.crt
 
+- name: Running configure
+  cisco.nxos.nxos_telemetry:
+    config: "{{ dialout.telemetry }}"
+    state: merged
+
+- name: Validate Telemetry Transport
+  ansible.builtin.include_tasks: validate.yaml
+  when: validate | d(False)
