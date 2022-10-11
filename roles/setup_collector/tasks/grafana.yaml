@@ -3,6 +3,9 @@
   ansible.builtin.get_url:
     url: "{{ package_path.grafana }}"
     dest: "{{ package_path.destination }}"
+  environment:
+    http_proxy: "{{ proxy.http | default(None) }}"
+    https_proxy: "{{ proxy.https | default(None) }}"
 
 - name: "Install grafana"
   ansible.builtin.apt:

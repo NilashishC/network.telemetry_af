@@ -3,6 +3,9 @@
   ansible.builtin.get_url:
     url: "{{ package_path.influxdb }}"
     dest: "{{ package_path.destination }}"
+  environment:
+    http_proxy: "{{ proxy.http | default(None) }}"
+    https_proxy: "{{ proxy.https | default(None) }}"
 
 - name: "Install Influxdb"
   ansible.builtin.apt:
@@ -18,6 +21,9 @@
   ansible.builtin.get_url:
     url: "{{ package_path.influx_client }}"
     dest: "{{ package_path.destination }}"
+  environment:
+    http_proxy: "{{ proxy.http | default(None) }}"
+    https_proxy: "{{ proxy.https | default(None) }}"
   when: result.changed == True
 
 - name: "Unpackage Influx client"
@@ -35,7 +41,7 @@
 - name: "Setup Influxdb and create dialout bucket"
   ansible.builtin.command: "{{ influx_client.setup }}"
   when: result.changed == True
-  ignore_errors: true
 
 - name: "Create InfluxDB dial-in bucket"
   ansible.builtin.command: "{{ influx_client.dialin_bucket }}"
+  when: result.changed == True

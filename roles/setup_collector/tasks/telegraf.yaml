@@ -3,11 +3,16 @@
   ansible.builtin.get_url:
     url: "{{ package_path.telegraf }}"
     dest: "{{ package_path.destination }}"
+  environment:
+    http_proxy: "{{ proxy.http | default(None) }}"
+    https_proxy: "{{ proxy.https | default(None) }}"
 
 - name: "Install Telegraf"
   ansible.builtin.apt:
     deb: "{{ package_path.destination }}/{{ package_path.telegraf.split('/')[-1] }}"
   register: result
+  ignore_errors: true
+
 
 - name: "Copy Telegraf authentication certificates"
   ansible.builtin.copy:

@@ -15,6 +15,7 @@
   loop:
     - scp-server
     - grpc
+    - telemetry
 
 - name: Configure Dial-Out Telemetry
   ansible.builtin.include_tasks: configure_dialout.yaml

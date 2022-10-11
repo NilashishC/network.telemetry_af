@@ -1,12 +1,12 @@
 ---
 # vars file for setup_nxos
 dialin:
-  certificate: /home/nchakrab/ansible-collections/certs/gnmi.pfx
+  certificate: /etc/telegraf/cert/gnmi.pfx
   passphrase: cisco123
 
 dialout:
-  collector_ip: 13.233.233.202
-  certificate: /home/nchakrab/ansible-collections/certs/telegraf.crt
+  collector_ip: 192.168.55.1
+  certificate: /etc/telegraf/cert/telegraf.crt
   telemetry:
     vrf: management
     certificate:

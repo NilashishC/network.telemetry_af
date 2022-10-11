@@ -22,9 +22,361 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 2,
-  "iteration": 1659982379607,
+  "iteration": 1665075274958,
   "links": [],
   "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 45,
+      "panels": [],
+      "title": "VXLAN EVPN Panel",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "semi-dark-orange",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 0,
+        "y": 1
+      },
+      "id": 47,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {
+          "valueSize": 100
+        }
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: -20s)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/fdb/mac-table/entries\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\", \"_value\", \"_field\"])\n  |> keyValues(keyColumns: [\"mac_address\"])\n  |> group()\n  |> count()\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Hardware Mac-Table Entries",
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 5,
+        "y": 1
+      },
+      "id": 50,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {
+          "valueSize": 100
+        }
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: -20s)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/fdb/l2rib/mac-table/entries/entry\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\", \"_value\", \"_field\"])\n  |> keyValues(keyColumns: [\"mac_address\"])\n  |> group()\n  |> count()\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Total L2RIB Entries",
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "semi-dark-orange",
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "color-text",
+            "filterable": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_field"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 421
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 22,
+        "x": 0,
+        "y": 6
+      },
+      "id": 49,
+      "options": {
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/fdb/mac-table/entries\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\"])\n  |> first()\n  |> toString()\n  |> group()\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Hardware Mac-Table Entries",
+      "type": "table"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "color-text",
+            "filterable": true
+          },
+          "mappings": [
+            {
+              "options": {
+                "Null": {
+                  "index": 0,
+                  "text": "DEFAULT"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_field"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 389
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 22,
+        "x": 0,
+        "y": 13
+      },
+      "id": 41,
+      "options": {
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "producer"
+          }
+        ]
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: -20s)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/fdb/l2rib/mac-table/entries/entry\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\"])\n  |> first()\n  |> toString()\n  |> group()\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "L2RIB Entries",
+      "type": "table"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "displayMode": "color-text",
+            "filterable": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_field"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 141
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 52,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "ethernet_tag"
+          }
+        ]
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: -50s)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-two-mac-ip-advertisement/type-two-route/state\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\"])\n  |> first()\n  |> toString()\n  |> group()\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "title": "BGP RIB Type2 Routes",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 43,
+      "panels": [],
+      "title": "Main Panel",
+      "type": "row"
+    },
     {
       "datasource": null,
       "fieldConfig": {
@@ -53,7 +405,7 @@
         "h": 2,
         "w": 6,
         "x": 0,
-        "y": 0
+        "y": 28
       },
       "id": 12,
       "options": {
@@ -122,9 +474,9 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 4,
+        "w": 3,
         "x": 6,
-        "y": 0
+        "y": 28
       },
       "id": 36,
       "options": {
@@ -178,8 +530,8 @@
       "gridPos": {
         "h": 2,
         "w": 4,
-        "x": 10,
-        "y": 0
+        "x": 9,
+        "y": 28
       },
       "id": 14,
       "options": {
@@ -234,8 +586,8 @@
       "gridPos": {
         "h": 2,
         "w": 5,
-        "x": 14,
-        "y": 0
+        "x": 13,
+        "y": 28
       },
       "id": 16,
       "options": {
@@ -291,7 +643,7 @@
         "h": 2,
         "w": 5,
         "x": 19,
-        "y": 0
+        "y": 28
       },
       "id": 18,
       "options": {
@@ -350,7 +702,7 @@
         "h": 6,
         "w": 4,
         "x": 0,
-        "y": 2
+        "y": 30
       },
       "id": 2,
       "options": {
@@ -372,7 +724,7 @@
           "refId": "A"
         }
       ],
-      "title": "CPU Load",
+      "title": "CPU Load Percentage",
       "type": "gauge"
     },
     {
@@ -406,7 +758,7 @@
         "h": 6,
         "w": 4,
         "x": 4,
-        "y": 2
+        "y": 30
       },
       "id": 4,
       "options": {
@@ -437,7 +789,7 @@
         "h": 6,
         "w": 10,
         "x": 8,
-        "y": 2
+        "y": 30
       },
       "id": 22,
       "options": {
@@ -484,7 +836,7 @@
         "h": 2,
         "w": 6,
         "x": 18,
-        "y": 2
+        "y": 30
       },
       "id": 20,
       "options": {
@@ -541,7 +893,7 @@
         "h": 4,
         "w": 6,
         "x": 18,
-        "y": 4
+        "y": 32
       },
       "id": 8,
       "options": {
@@ -598,7 +950,7 @@
         "h": 4,
         "w": 3,
         "x": 0,
-        "y": 8
+        "y": 36
       },
       "id": 6,
       "options": {
@@ -657,7 +1009,7 @@
         "h": 4,
         "w": 3,
         "x": 3,
-        "y": 8
+        "y": 36
       },
       "id": 27,
       "options": {
@@ -708,7 +1060,7 @@
         "h": 8,
         "w": 5,
         "x": 6,
-        "y": 8
+        "y": 36
       },
       "id": 24,
       "options": {
@@ -763,7 +1115,7 @@
         "h": 8,
         "w": 5,
         "x": 11,
-        "y": 8
+        "y": 36
       },
       "id": 29,
       "options": {
@@ -851,7 +1203,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 8
+        "y": 36
       },
       "id": 10,
       "options": {
@@ -907,7 +1259,7 @@
         "h": 4,
         "w": 3,
         "x": 0,
-        "y": 12
+        "y": 40
       },
       "id": 25,
       "options": {
@@ -966,7 +1318,7 @@
         "h": 4,
         "w": 3,
         "x": 3,
-        "y": 12
+        "y": 40
       },
       "id": 26,
       "options": {
@@ -1055,7 +1407,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 16
+        "y": 44
       },
       "id": 31,
       "options": {
@@ -1130,7 +1482,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 16
+        "y": 44
       },
       "id": 33,
       "options": {
@@ -1209,7 +1561,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 16
+        "y": 44
       },
       "id": 34,
       "options": {
@@ -1289,7 +1641,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 22
+        "y": 50
       },
       "id": 38,
       "options": {
@@ -1369,7 +1721,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 22
+        "y": 50
       },
       "id": 39,
       "options": {
@@ -1392,7 +1744,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "30s",
+  "refresh": "",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [],
@@ -1402,8 +1754,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "93180YC-FX-L03-S4",
-          "value": "93180YC-FX-L03-S4"
+          "text": "n9k-106",
+          "value": "n9k-106"
         },
         "datasource": null,
         "definition": "import \"influxdata/influxdb/schema\"\n\nschema.measurementTagValues(\n  bucket: \"nxos_dialout\",\n  tag: \"source\",\n  measurement: \"sys\"\n)\n  ",
@@ -1425,9 +1777,10 @@
       {
         "allValue": null,
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "172.25.74.87",
-          "value": "172.25.74.87"
+          "text": "None",
+          "value": ""
         },
         "datasource": null,
         "definition": "from(bucket: \"nxos_dialout\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-interfaces:interfaces/interface[name=mgmt0]/subinterfaces/subinterface[index=0]/ipv4/addresses/address\")\n  |> filter(fn: (r) => r[\"_field\"] == \"config/ip\")\n  |> filter(fn: (r) => r[\"source\"] == \"${source}\")\n  |> yield(name: \"last\")",
@@ -1456,5 +1809,5 @@
   "timezone": "",
   "title": "fabric dashboard dialout",
   "uid": "d3GC3s4nz",
-  "version": 6
+  "version": 1
 }

@@ -1,16 +1,16 @@
 ---
 # vars file for setup_collector
 package_path:
-  destination: /home/ubuntu
-  influxdb: https://dl.influxdata.com/influxdb/releases/influxdb2-2.4.0-amd64.deb
+  destination: /home/admin
+  influxdb: https://dl.influxdata.com/influxdb/releases/influxdb2-2.0.8-amd64.deb
   influx_client: https://dl.influxdata.com/influxdb/releases/influxdb2-client-2.4.0-linux-amd64.tar.gz
   telegraf: https://dl.influxdata.com/telegraf/releases/telegraf_1.21.4-1_amd64.deb
-  grafana: https://dl.grafana.com/enterprise/release/grafana-enterprise_9.1.6_amd64.deb
+  grafana: https://dl.grafana.com/enterprise/release/grafana-enterprise_8.1.2_amd64.deb
 
 telegraf:
   config: files/telegraf/telegraf.conf.j2
   dialin_config: files/telegraf/gnmi.conf.j2
-  certificates: /home/ubuntu/certs/
+  certificates: /home/admin/certs/
 
 influxdb:
   org: Ansible
@@ -50,3 +50,10 @@ dialin:
     port: 50051
     username: admin
     password: admin
+
+proxy:
+  # Example if proxy needed
+  # http: http://proxy.example.com:80
+  # https: http://proxy.example.com:80
+  http: None
+  https: None
