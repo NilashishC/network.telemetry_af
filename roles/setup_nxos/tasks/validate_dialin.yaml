@@ -1,0 +1,15 @@
+---
+# tasks file for validating dialin
+
+- name: Allow the dialin connection to be established
+  ansible.builtin.pause:
+    seconds: 10
+
+- name: Fetch gNMI RPC summary information
+  cisco.nxos.nxos_command:
+    commands: "show grpc gnmi rpc summary | include {{ collector_ip }}"
+  register: result
+
+- name: Assert that all collector dial-in is Active
+  ansible.builtin.assert:
+    that: "'Active' in result.stdout[0]"

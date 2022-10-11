@@ -1,5 +1,5 @@
 ---
-# tasks file for validating telemetry transport
+# tasks file for validating dialout
 
 - name: Allow the dialout connection to be established
   ansible.builtin.pause:
