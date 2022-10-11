@@ -1,6 +1,10 @@
 ---
 # tasks file for validating telemetry transport
 
+- name: Allow the dialout connection to be established
+  ansible.builtin.pause:
+    seconds: 10
+
 - name: Fetch telemetry transport information
   cisco.nxos.nxos_command:
     commands: show telemetry transport
