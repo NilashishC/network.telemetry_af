@@ -1,11 +1,12 @@
 ---
 # vars file for setup_nxos
+collector_ip: 192.168.55.1
+
 dialin:
   certificate: /etc/telegraf/cert/gnmi.pfx
   passphrase: cisco123
 
 dialout:
-  collector_ip: 192.168.55.1
   certificate: /etc/telegraf/cert/telegraf.crt
   telemetry:
     certificate:
@@ -14,7 +15,7 @@ dialout:
     destination_groups:
       - destination:
           encoding: gpb
-          ip: 10.122.197.147
+          ip: "{{ collector_ip }}"
           port: '57000'
           protocol: grpc
         id: telegraf
