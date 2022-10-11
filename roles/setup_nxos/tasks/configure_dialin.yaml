@@ -11,3 +11,7 @@
       - "crypto ca trustpoint gnmi"
       - "crypto ca import gnmi pkcs12 gnmi.pfx {{ dialin.passphrase }}"
       - "grpc certificate gnmi"
+
+- name: Validate dialin connection
+  ansible.builtin.include_tasks: validate_dialin.yaml
+  when: validate | d(False)

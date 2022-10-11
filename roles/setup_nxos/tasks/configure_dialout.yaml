@@ -11,5 +11,5 @@
     state: merged
 
 - name: Validate Telemetry Transport
-  ansible.builtin.include_tasks: validate.yaml
+  ansible.builtin.include_tasks: validate_dialout.yaml
   when: validate | d(False)
