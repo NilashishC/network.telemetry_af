@@ -1,7 +1,7 @@
 ---
 # vars file for setup_collector
 package_path:
-  destination: /home/ubuntu
+  destination: /home/admin
   influxdb: https://dl.influxdata.com/influxdb/releases/influxdb2-2.0.8-amd64.deb
   influx_client: https://dl.influxdata.com/influxdb/releases/influxdb2-client-2.4.0-linux-amd64.tar.gz
   telegraf: https://dl.influxdata.com/telegraf/releases/telegraf_1.21.4-1_amd64.deb
