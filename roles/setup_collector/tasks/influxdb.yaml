@@ -3,9 +3,7 @@
   ansible.builtin.get_url:
     url: "{{ package_path.influxdb }}"
     dest: "{{ package_path.destination }}"
-  environment:
-    http_proxy: "{{ proxy.http | default(None) }}"
-    https_proxy: "{{ proxy.https | default(None) }}"
+  environment: "{{ proxy | d(omit)}}"
 
 - name: "Install Influxdb"
   ansible.builtin.apt:
@@ -21,9 +19,7 @@
   ansible.builtin.get_url:
     url: "{{ package_path.influx_client }}"
     dest: "{{ package_path.destination }}"
-  environment:
-    http_proxy: "{{ proxy.http | default(None) }}"
-    https_proxy: "{{ proxy.https | default(None) }}"
+  environment: "{{ proxy | d(omit)}}"
   when: result.changed == True
 
 - name: "Unpackage Influx client"

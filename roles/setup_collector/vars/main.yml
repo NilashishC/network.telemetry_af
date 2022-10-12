@@ -1,7 +1,7 @@
 ---
 # vars file for setup_collector
 package_path:
-  destination: /home/admin
+  destination: /home/ubuntu
   influxdb: https://dl.influxdata.com/influxdb/releases/influxdb2-2.0.8-amd64.deb
   influx_client: https://dl.influxdata.com/influxdb/releases/influxdb2-client-2.4.0-linux-amd64.tar.gz
   telegraf: https://dl.influxdata.com/telegraf/releases/telegraf_1.21.4-1_amd64.deb
@@ -51,9 +51,6 @@ dialin:
     username: admin
     password: admin
 
-proxy:
-  # Example if proxy needed
-  # http: http://proxy.example.com:80
-  # https: http://proxy.example.com:80
-  http: None
-  https: None
+#proxy:
+#  http_proxy: http://proxy.example.com:80
+#  https_proxy: https://proxy.example.com:443
