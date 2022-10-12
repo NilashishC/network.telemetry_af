@@ -21,8 +21,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
-  "iteration": 1665075274958,
+  "id": 12,
+  "iteration": 1665611550252,
   "links": [],
   "panels": [
     {
@@ -74,7 +74,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "last"
           ],
           "fields": "",
           "values": false
@@ -88,7 +88,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: -20s)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/fdb/mac-table/entries\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\", \"_value\", \"_field\"])\n  |> keyValues(keyColumns: [\"mac_address\"])\n  |> group()\n  |> count()\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/fdb/mac-table/entries\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\", \"_value\", \"_field\"])\n  |> keyValues(keyColumns: [\"mac_address\"])\n  |> group()\n  |> count()\n  |> yield(name: \"last\")",
           "refId": "A"
         }
       ],
@@ -129,7 +129,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "last"
           ],
           "fields": "",
           "values": false
@@ -143,7 +143,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: -20s)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/fdb/l2rib/mac-table/entries/entry\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\", \"_value\", \"_field\"])\n  |> keyValues(keyColumns: [\"mac_address\"])\n  |> group()\n  |> count()\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/fdb/l2rib/mac-table/entries/entry\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\", \"_value\", \"_field\"])\n  |> keyValues(keyColumns: [\"mac_address\"])\n  |> group()\n  |> count()\n  |> yield(name: \"last\")",
           "refId": "A"
         }
       ],
@@ -286,7 +286,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: -20s)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/fdb/l2rib/mac-table/entries/entry\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\"])\n  |> first()\n  |> toString()\n  |> group()\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/fdb/l2rib/mac-table/entries/entry\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\"])\n  |> first()\n  |> toString()\n  |> group()\n  |> yield(name: \"last\")",
           "refId": "A"
         }
       ],
@@ -356,7 +356,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: -50s)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-two-mac-ip-advertisement/type-two-route/state\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\"])\n  |> first()\n  |> toString()\n  |> group()\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-two-mac-ip-advertisement/type-two-route/state\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\"])\n  |> first()\n  |> toString()\n  |> group()\n  |> yield(name: \"last\")",
           "refId": "A"
         }
       ],
@@ -439,77 +439,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "green",
-                  "index": 0,
-                  "text": "UP"
-                },
-                "1": {
-                  "color": "red",
-                  "index": 1,
-                  "text": "DOWN"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 28
-      },
-      "id": 36,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "value"
-      },
-      "pluginVersion": "8.1.2",
-      "targets": [
-        {
-          "query": "from(bucket: \"nxos_dialout\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ping\")\n  |> filter(fn: (r) => r[\"_field\"] == \"result_code\")\n    |> filter(fn: (r) => r[\"url\"] == \"${mgmt_ip}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
-          "refId": "A"
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -530,7 +459,7 @@
       "gridPos": {
         "h": 2,
         "w": 4,
-        "x": 9,
+        "x": 6,
         "y": 28
       },
       "id": 14,
@@ -586,7 +515,7 @@
       "gridPos": {
         "h": 2,
         "w": 5,
-        "x": 13,
+        "x": 10,
         "y": 28
       },
       "id": 16,
@@ -642,7 +571,7 @@
       "gridPos": {
         "h": 2,
         "w": 5,
-        "x": 19,
+        "x": 15,
         "y": 28
       },
       "id": 18,
@@ -1809,5 +1738,5 @@
   "timezone": "",
   "title": "fabric dashboard dialout",
   "uid": "d3GC3s4nz",
-  "version": 1
+  "version": 7
 }

@@ -21,8 +21,8 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 1,
-    "iteration": 1665157726952,
+    "id": 11,
+    "iteration": 1665611427412,
     "links": [],
     "panels": [
         {
@@ -74,7 +74,7 @@
             "options": {
                 "reduceOptions": {
                     "calcs": [
-                        "lastNotNull"
+                        "last"
                     ],
                     "fields": "",
                     "values": false
@@ -88,7 +88,7 @@
             "pluginVersion": "8.1.2",
             "targets": [
                 {
-                    "query": "from(bucket: \"nxos_gnmi\")\n  |> range(start: -10s)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"mac_table_entries\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\", \"_value\", \"_field\"])\n  |> keyValues(keyColumns: [\"mac_address\"])\n  |> group()\n  |> count()\n  |> yield(name: \"last\")",
+                    "query": "from(bucket: \"nxos_gnmi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"mac_table_entries\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\", \"_value\", \"_field\"])\n  |> keyValues(keyColumns: [\"mac_address\"])\n  |> group()\n  |> count()\n  |> yield(name: \"last\")",
                     "refId": "A"
                 }
             ],
@@ -129,7 +129,7 @@
             "options": {
                 "reduceOptions": {
                     "calcs": [
-                        "lastNotNull"
+                        "last"
                     ],
                     "fields": "",
                     "values": false
@@ -143,7 +143,7 @@
             "pluginVersion": "8.1.2",
             "targets": [
                 {
-                    "query": "from(bucket: \"nxos_gnmi\")\n  |> range(start: -10s)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"l2rib_mac_entries\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\", \"_value\", \"_field\", \"name\", \"source\", \"producer\"])\n  |> keyValues(keyColumns: [\"mac_address\"])\n  |> group()\n  |> count()\n  |> yield(name: \"last\")",
+                    "query": "from(bucket: \"nxos_gnmi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"l2rib_mac_entries\")\n  |> drop(columns: [\"_time\", \"_start\", \"_stop\", \"path\", \"subscription\", \"tag1\", \"host\", \"_measurement\", \"_value\", \"_field\", \"name\", \"source\", \"producer\"])\n  |> keyValues(keyColumns: [\"mac_address\"])\n  |> group()\n  |> count()\n  |> yield(name: \"last\")",
                     "refId": "A"
                 }
             ],
@@ -1689,7 +1689,7 @@
             "type": "timeseries"
         }
     ],
-    "refresh": "",
+    "refresh": "5s",
     "schemaVersion": 30,
     "style": "dark",
     "tags": [],
@@ -1729,5 +1729,5 @@
     "timezone": "",
     "title": "fabric dashboard gnmi",
     "uid": "ug6ErxV7k",
-    "version": 24
+    "version": 6
 }
