@@ -16,6 +16,8 @@ ansible-galaxy collection install git+https://github.com/NilashishC/network.tele
   tasks:
     - ansible.builtin.include_role:
         name: network.telemetry.setup_collector
+      vars:
+        collector_setup_data: /path/to/collector_setup_data
 
 ```
 ```yaml
@@ -25,6 +27,8 @@ ansible-galaxy collection install git+https://github.com/NilashishC/network.tele
   tasks:
     - ansible.builtin.include_role:
         name: network.telemetry.setup_nxos
+      vars:
+        nxos_setup_data: /path/to/nxos_setup_data
 
 ```
 
@@ -33,6 +37,10 @@ ansible-galaxy collection install git+https://github.com/NilashishC/network.tele
 ### Sample collector setup data file
 
 An example collector setup data file is available [here](https://github.com/NilashishC/network.telemetry/blob/main/roles/setup_collector/vars/main.yml).
+
+### Sample collector setup data file
+
+An example nxos setup data file is available [here](https://github.com/NilashishC/network.telemetry/blob/main/roles/setup_nxos/vars/main.yml).
 
 
 ### See Also:
