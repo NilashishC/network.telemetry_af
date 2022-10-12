@@ -38,7 +38,7 @@ ansible-galaxy collection install git+https://github.com/NilashishC/network.tele
 
 An example collector setup data file is available [here](https://github.com/NilashishC/network.telemetry/blob/main/roles/setup_collector/vars/main.yml).
 
-### Sample collector setup data file
+### Sample nxos setup data file
 
 An example nxos setup data file is available [here](https://github.com/NilashishC/network.telemetry/blob/main/roles/setup_nxos/vars/main.yml).
 
